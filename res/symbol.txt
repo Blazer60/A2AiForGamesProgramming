@@ -1,0 +1,14 @@
+#ve - version
+#ep - episode
+#em - episode max
+#im - iteration max
+#xx - exploration multiplier
+#rg - goal reward
+#rf - reward towards goal
+#rb - reward away from goal
+#rw - reward into wall
+#xr - exploration rate
+#xm - exploration rate minimum
+#al - alpha
+#ga - gamma
+#qt - Q-table values
