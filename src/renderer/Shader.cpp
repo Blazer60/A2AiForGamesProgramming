@@ -15,9 +15,16 @@
 #include <glew.h>
 
 
-Shader::Shader(const std::string &filepath) : mFilePath(filepath), mRendererId(0)
+Shader::Shader(const std::string &filepath)
+    : mFilePath(filepath), mRendererId(0)
 {
     shaderProgramSource source = parseShader(filepath);
+    if (source.vertexSource.empty() || source.fragmentSource.empty())
+    {
+        debug::log("Could not find anything in " + filepath + "\nCheck that the file path from .exe is correct",
+                   debug::severity::Major
+                   );
+    }
     mRendererId = createShader(source.vertexSource, source.fragmentSource);
 }
 
@@ -145,12 +152,14 @@ unsigned int Shader::compileShader(unsigned int type, const std::string &source)
     {
         int length;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-//        char message[length];
         char* message = (char*)alloca(length * sizeof(char));
         glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment") << "shader" << std::endl;
-        std::cout << message << std::endl;
         glDeleteShader(id);
+        debug::log(
+                "Failed to compile " + static_cast<std::string>((type == GL_VERTEX_SHADER ? "Vertex" : "Fragment")) + " shader\n"\
+                "OpenGL Output:\n" + message,
+                debug::severity::Major
+                );
         return 0;
     }
 

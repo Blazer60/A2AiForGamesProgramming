@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)  # 3.20
+cmake_minimum_required(VERSION 3.20)  # 3.20 Recommended.
 set(PROJECT_NAME A2AiGameProgramming)
 project(${PROJECT_NAME})
 

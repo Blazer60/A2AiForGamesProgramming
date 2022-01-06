@@ -12,10 +12,12 @@
 #include "Pch.h"
 #endif  // NO_PCH
 
-#include <source_location>
 #include <exception>
 #include <deque>
 #include <set>
+#include <string_view>
+#include <string>
+#include <glew.h>
 
 namespace debug
 {
